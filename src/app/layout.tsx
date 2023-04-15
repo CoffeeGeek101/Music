@@ -21,7 +21,7 @@ export default function RootLayout({
       <body
       className={`bg-slate-900 text-white ${font.className}`}
       >
-        <div className='flex flex-row relative'>
+        <div className='flex flex-row-reverse relative w-[100vw] h-[100vh] '>
         <Sidebar/>
         {children}
         </div>
