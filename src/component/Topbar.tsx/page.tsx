@@ -1,5 +1,6 @@
 "use client"
 
+import useLoginModal from '@/hooks/LoginHook';
 import { AlignJustify } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import Avatar from './Avatar';
@@ -7,6 +8,7 @@ import UserItem from './UserItem';
 
 const Topbar : React.FC = () => {
 
+    const useLogin = useLoginModal();
     const [wish, setWish] = useState<string>();
     let hour = new Date().getHours();
 
@@ -47,7 +49,7 @@ const Topbar : React.FC = () => {
                     <div className=' w-[100px] lg:w-[200px] flex flex-col h-auto bg-slate-800 absolute top-[50px] right-1 rounded-lg transition-all'>
                         <UserItem onClick={()=>{}} label={'About us'}/>
                         <UserItem onClick={()=>{}} label={'Guide'}/>
-                        <UserItem onClick={()=>{}} label={'Login'}/>
+                        <UserItem onClick={useLogin.onOpen} label={'Login'}/>
                     </div>
                 )
             }
