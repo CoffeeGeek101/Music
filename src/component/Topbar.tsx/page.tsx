@@ -1,12 +1,20 @@
 "use client"
 
+import { getCurrentUser } from '@/actions/getCurrentUser';
 import useLoginModal from '@/hooks/LoginHook';
 import { AlignJustify } from 'lucide-react';
+import { signOut } from 'next-auth/react';
 import React, { useEffect, useState } from 'react'
 import Avatar from './Avatar';
 import UserItem from './UserItem';
 
-const Topbar : React.FC = () => {
+interface ITopbarProps{
+    user : User | null
+}
+
+const Topbar:React.FC<ITopbarProps> = ({user}) => {
+
+    // console.log(user)
 
     const useLogin = useLoginModal();
     const [wish, setWish] = useState<string>();
@@ -22,7 +30,6 @@ const Topbar : React.FC = () => {
         }
     },[hour]);
 
-    const [hasUser, setHasUser] = useState<boolean>(false);
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
@@ -35,13 +42,13 @@ const Topbar : React.FC = () => {
             >{wish}.</p>
             <p className='text-xs lg:text-base ml-3 font-light text-[#d9edff]'>have a good time.</p>
         </div>
-        <div className='flex flex-row gap-2 items-center relative shadow-sm shadow-blue-600 px-2 py-1 rounded-full hover:cursor-pointer'>
+        <div className='flex flex-row gap-2 items-center relative shadow-sm shadow-blue-600 px-2 py-[8px] rounded-full hover:cursor-pointer'>
             {
-            !hasUser && <div className='absolute h-3 w-3 bg-blue-700 rounded-full top-0 right-0'>
+            !user && <div className='absolute h-3 w-3 bg-blue-700 rounded-full top-0 right-0'>
                             <div className='animate-ping h-full w-full bg-blue-400 rounded-full'></div>
                         </div>
             }
-            <Avatar/>
+            <Avatar avi={user?.image}/>
             <p className='text-[#d9edff] font-thin'>|</p>
             <AlignJustify color='#d9edff'/>
             {
@@ -49,7 +56,7 @@ const Topbar : React.FC = () => {
                     <div className=' w-[100px] lg:w-[200px] flex flex-col h-auto bg-slate-800 absolute top-[50px] right-1 rounded-lg transition-all'>
                         <UserItem onClick={()=>{}} label={'About us'}/>
                         <UserItem onClick={()=>{}} label={'Guide'}/>
-                        <UserItem onClick={useLogin.onOpen} label={'Login'}/>
+                       { user ? (<UserItem label={'Logout'} onClick={()=>signOut()}/>) : (<UserItem onClick={useLogin.onOpen} label={'Login'}/>) }
                     </div>
                 )
             }

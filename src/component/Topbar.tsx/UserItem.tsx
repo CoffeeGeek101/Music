@@ -4,7 +4,7 @@ import { ChevronRight } from 'lucide-react';
 import React from 'react'
 
 interface IUserItem{
-    onClick : (e : React.MouseEvent<HTMLDivElement>) => void;
+    onClick ?: (e : React.MouseEvent<HTMLDivElement>) => void;
     label : string
 }
 
