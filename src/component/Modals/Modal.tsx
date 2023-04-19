@@ -14,7 +14,7 @@ interface IModal{
     secondaryActionLabel ?: () => void;
     title : string;
     body ?: React.ReactElement;
-    logo ?: React.ReactElement;
+    footer ?: React.ReactElement;
 }   
 
 
@@ -28,7 +28,7 @@ const Modal : React.FC<IModal> = ({
     secondaryActionLabel,
     title,
     body,
-    logo
+    footer
 }) => {
 
     const [showModal, setShowModal] = useState(isOpen);
@@ -80,10 +80,7 @@ const Modal : React.FC<IModal> = ({
                     {body}
                 </div>
                 <div className='w-full flex flex-col justify-center'>
-                    <Button size='modal' variant='auth' className='flex items-center justify-center gap-1'>
-                        {logo}
-                        {actionLabel}
-                    </Button>
+                    {footer}
                     <p className='text-center mt-[40px] text-xs font-thin text-gray-500'>© coffeeGeek101 | shoumyadeep </p>
                 </div>
             </div>

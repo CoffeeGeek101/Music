@@ -3,7 +3,7 @@ import { cva, VariantProps } from 'class-variance-authority'
 import React, { ButtonHTMLAttributes } from 'react'
 
 const ButtonVariantProps = cva(
-    'active:scale-95 rounded-full hover:cursor-pointer shadow-lg shadow-[#507fff7e]',
+    'active:scale-95 rounded-full hover:cursor-pointer shadow-lg shadow-[#507fff7e] disabled:bg-blue-950 disabled:text-slate-50 disabled:cursor-not-allowed',
     {
         variants : {
             variant : {

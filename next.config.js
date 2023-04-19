@@ -5,9 +5,10 @@ const nextConfig = {
   },
   images : {
     domains : [
-      "i.scdn.co"
+      "i.scdn.co",
+      "lh3.googleusercontent.com"
     ]
-  }
+  },
 }
 
 module.exports = nextConfig
