@@ -11,7 +11,7 @@ interface IModal{
     actionLabel ?: string;
     disabled ?: boolean;
     secondaryAction ?: () => void;
-    secondaryActionLabel ?: () => void;
+    secondaryActionLabel ?: string;
     title : string;
     body ?: React.ReactElement;
     footer ?: React.ReactElement;
@@ -80,6 +80,10 @@ const Modal : React.FC<IModal> = ({
                     {body}
                 </div>
                 <div className='w-full flex flex-col justify-center'>
+                    <div className='flex flex-row justify-center'>
+                        {actionLabel && (<Button>{actionLabel}</Button>)}
+                        {secondaryActionLabel && (<Button>{secondaryActionLabel}</Button>)}
+                    </div>
                     {footer}
                     <p className='text-center mt-[40px] text-xs font-thin text-gray-500'>© coffeeGeek101 | shoumyadeep </p>
                 </div>
