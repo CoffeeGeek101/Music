@@ -80,9 +80,9 @@ const Modal : React.FC<IModal> = ({
                     {body}
                 </div>
                 <div className='w-full flex flex-col justify-center'>
-                    <div className='flex flex-row justify-center'>
-                        {actionLabel && (<Button>{actionLabel}</Button>)}
-                        {secondaryActionLabel && (<Button>{secondaryActionLabel}</Button>)}
+                    <div className='flex flex-row justify-center gap-9'>
+                        {secondaryActionLabel && (<Button onClick={secondaryAction} variant='backy'>{secondaryActionLabel}</Button>)}
+                        {actionLabel && (<Button onClick={onSubmit}>{actionLabel}</Button>)}
                     </div>
                     {footer}
                     <p className='text-center mt-[40px] text-xs font-thin text-gray-500'>© coffeeGeek101 | shoumyadeep </p>

@@ -2,6 +2,7 @@
 
 import { getCurrentUser } from '@/actions/getCurrentUser';
 import useLoginModal from '@/hooks/LoginHook';
+import usePrefernceModal from '@/hooks/PreferenceHook';
 import { AlignJustify } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import React, { useEffect, useState } from 'react'
@@ -17,6 +18,8 @@ const Topbar:React.FC<ITopbarProps> = ({user}) => {
     // console.log(user)
 
     const useLogin = useLoginModal();
+    const usePreference = usePrefernceModal();
+
     const [wish, setWish] = useState<string>();
     let hour = new Date().getHours();
 
@@ -56,6 +59,7 @@ const Topbar:React.FC<ITopbarProps> = ({user}) => {
                     <div className=' w-[100px] lg:w-[200px] flex flex-col h-auto bg-slate-800 absolute top-[50px] right-1 rounded-lg transition-all'>
                         <UserItem onClick={()=>{}} label={'About us'}/>
                         <UserItem onClick={()=>{}} label={'Guide'}/>
+                        {user && (<UserItem label='My Preferences' onClick={()=>usePreference.onOpen()}/>)}
                        { user ? (<UserItem label={'Logout'} onClick={()=>signOut()}/>) : (<UserItem onClick={useLogin.onOpen} label={'Login'}/>) }
                     </div>
                 )
