@@ -1,43 +1,22 @@
 export const lang = [
     { 
-        code :'bn_IN',
-        name : 'Bengali'    
+        code :'IN',
+        name : 'Indian'    
     },
     {
-        code :'en_IN',
-        name : 'English'   
+        code :'US',
+        name : 'American'   
     },
     {
-        code : 'gu_IN',
-        name:'Gujarati'
+        code : 'GB',
+        name:'British'
     },
     {
-        code : 'hi_IN',
-        name:'Hindi'
+        code : 'ES',
+        name:'Spanish'
     },
     {
-        code : 'kn_IN',
-        name:'Kannada'
+        code : 'KR',
+        name:'Korean'
     },
-    {
-        code : 'ml_IN',
-        name:'Malayalam'
-    },
-    {
-        code : 'mr_IN',
-        name:'Marathi'
-    },
-    {
-        code : 'pa_IN',
-        name:'Punjabi'
-    },
-    {
-        code : 'ta_IN',
-        name:'Tamil'
-    },
-    {
-        code : 'te_IN',
-        name:'Telugu'
-    },
-
 ];
