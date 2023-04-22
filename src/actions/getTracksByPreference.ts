@@ -12,23 +12,28 @@ export default async function getTracksByPreference( {qGenre:genre, qLang:lang}:
     const token = await getValid_token();
 
     const genres = genre;
-    const locale = lang.join(',');
     const type = 'track';
-    const market = 'IN';
-    const limit = '4'
+    const limit = '30';
+    const market = lang.join(',');
 
     
     const genreQuery = genres.map(genre => `genre:${genre}`).join(' OR ');
+   
+
+
+    const query = `${genreQuery}`;
+    console.log(query)
 
     try{
     const res = await axios.get(
-        `${BASE_URL}/search?q=${genreQuery}&type=${type}&market=${market}&locale=${locale}&limit=${limit}`,
+        `${BASE_URL}/search?q=${query}&type=${type}&market=${market}&limit=${limit}`,
         {
             headers : {
                 'Authorization' : `Bearer ${token}`
             }
         }
     )
+    console.log(res.data)
     return res.data;
 
     }catch(error){

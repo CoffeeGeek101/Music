@@ -3,25 +3,24 @@ import { BASE_URL } from "@/lib/util";
 import axios from "axios";
 
 interface IgetTracks{
-    qGenre ?:  string[];
+    qGenre :  string[];
     qLang :  string[];
 }
 
-export default async function getPLaylistByPreference( {qLang:lang}:IgetTracks ){
+export default async function getPLaylistByPreference( {qLang:lang, qGenre:genre}:IgetTracks ){
 
     const token = await getValid_token();
 
-    const locale = lang.join(',');
+    const genres = genre;
     const type = 'playlist';
-    const market = 'IN';
-    const limit = '10'
+    const limit = '10';
+    const market = lang.join(',');
 
-    
-    const genreQuery = 'pop';
+    const genreQuery = genres.map(genre => `${genre}`).join(' OR ');    
 
     try{
     const res = await axios.get(
-        `${BASE_URL}/search?q=${genreQuery}&type=${type}&market=${market}&locale=${locale}&limit=${limit}`,
+        `${BASE_URL}/search?q=${genreQuery}&type=${type}&market-${market}&limit=${limit}`,
         {
             headers : {
                 'Authorization' : `Bearer ${token}`
