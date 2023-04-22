@@ -68,7 +68,7 @@ const PreferenceModal: React.FC<IPreferenceModal> = ({user}) => {
     <div className='flex flex-col items-center gap-5'>
       <div className='flex flex-col items-center'>
       <p className='text-xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-white to-[#899fff]'>Select your cult.</p>
-      <p className='text-sm text-gray-500 font-light'>we'll let you know what people are listing.</p>
+      <p className='text-sm text-gray-500 font-light'>we will let you know what people are listing.</p>
       </div>
       <div className='flex flex-row w-full h-auto flex-wrap items-center justify-center gap-4'>
         <LanguageInput user={user} language={lang_array}/>
