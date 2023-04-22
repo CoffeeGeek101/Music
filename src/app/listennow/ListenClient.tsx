@@ -22,8 +22,10 @@ const ListenClient: React.FC<IListenNow>  = ({tracks, playlist, user}) => {
     const usePrefernce = usePrefernceModal();
 
     useEffect(() => {
-        if (user.lang.length === 0 && langIntervalID.current.current === null) {
-          langIntervalID.current.current = setInterval(() => {
+        let langInterval = langIntervalID.current.current;
+        let genreInterval = genreIntervalID.current.current;
+        if (user.lang.length === 0 && langInterval === null) {
+          langInterval = setInterval(() => {
             toast.custom(
             <div className='bg-white/60 backdrop-blur-2xl p-5 rounded-xl shadow-lg'>
                 <div className='flex flex-row justify-around items-center gap-8'>
@@ -39,13 +41,13 @@ const ListenClient: React.FC<IListenNow>  = ({tracks, playlist, user}) => {
             </div>,
             {duration : 7000, position:'bottom-center'}
             );
-            clearInterval(langIntervalID.current.current);
-            langIntervalID.current.current = null;
+            clearInterval(langInterval);
+            langInterval = null;
           }, 5000);
         }
     
-        if (user.genre.length === 0 && genreIntervalID.current.current === null) {
-          genreIntervalID.current.current = setInterval(() => {
+        if (user.genre.length === 0 && genreInterval === null) {
+          genreInterval = setInterval(() => {
             toast.custom(
                 <div className='bg-white/60 backdrop-blur-2xl p-5 rounded-xl shadow-lg'>
                     <div className='flex flex-row justify-around items-center gap-8'>
@@ -61,16 +63,16 @@ const ListenClient: React.FC<IListenNow>  = ({tracks, playlist, user}) => {
                 </div>,
                 {duration : 7000, position:'bottom-center'}
             );
-            clearInterval(genreIntervalID.current.current);
-            genreIntervalID.current.current = null;
+            clearInterval(genreInterval);
+            genreInterval = null;
           }, 9000);
         }
     
         return () => {
-          clearInterval(langIntervalID.current.current);
-          clearInterval(genreIntervalID.current.current);
+          clearInterval(langInterval);
+          clearInterval(genreInterval);
         };
-      }, [user.lang, user.genre]);
+      }, [user.lang, user.genre, usePrefernce.onOpen]);
 
   return (
     <div className='flex flex-col gap-4'>
