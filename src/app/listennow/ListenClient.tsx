@@ -1,17 +1,76 @@
 "use client"
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import TrackCard from '@/component/TrackCard';
 import GPlaylistCard from '@/component/_gPlaylistCard';
+import { toast } from 'react-hot-toast';
+import { FileHeart, Globe2 } from 'lucide-react';
+import Button from '@/component/Button';
+import usePrefernceModal from '@/hooks/PreferenceHook';
 
 interface IListenNow{
     tracks : any;
-    playlist : any
+    playlist : any;
+    user : User
 }
 
-const ListenClient: React.FC<IListenNow>  = ({tracks, playlist}) => {
+const ListenClient: React.FC<IListenNow>  = ({tracks, playlist, user}) => {
 
-    console.log(playlist)
+    const langIntervalID = useRef <React.MutableRefObject<any>>({current : null});
+    const genreIntervalID = useRef <React.MutableRefObject<any>>({current : null});
+
+    const usePrefernce = usePrefernceModal();
+
+    useEffect(() => {
+        if (user.lang.length === 0 && langIntervalID.current.current === null) {
+          langIntervalID.current.current = setInterval(() => {
+            toast.custom(
+            <div className='bg-white/60 backdrop-blur-2xl p-5 rounded-xl shadow-lg'>
+                <div className='flex flex-row justify-around items-center gap-8'>
+                    <Globe2 color='#5943ff'/>
+                    <div className='flex flex-col items-start'>
+                        <p className='text-black font-semibold text-base'>Set your Type of Music</p>
+                        <p className='text-gray-500 font-sans text-xs'>Go to preferences</p>
+                    </div>
+                    <Button variant='main' size='small' onClick={usePrefernce.onOpen}>
+                        Preference
+                    </Button>
+                </div>
+            </div>,
+            {duration : 7000, position:'bottom-center'}
+            );
+            clearInterval(langIntervalID.current.current);
+            langIntervalID.current.current = null;
+          }, 5000);
+        }
+    
+        if (user.genre.length === 0 && genreIntervalID.current.current === null) {
+          genreIntervalID.current.current = setInterval(() => {
+            toast.custom(
+                <div className='bg-white/60 backdrop-blur-2xl p-5 rounded-xl shadow-lg'>
+                    <div className='flex flex-row justify-around items-center gap-8'>
+                        <FileHeart color='#5943ff'/>
+                        <div className='flex flex-col items-start'>
+                            <p className='text-black font-semibold text-base'>Set Your Music Genre</p>
+                            <p className='text-gray-500 font-sans text-xs'>Go to preferences</p>
+                        </div>
+                        <Button variant='main' size='small' onClick={usePrefernce.onOpen}>
+                            Preference
+                        </Button>
+                    </div>
+                </div>,
+                {duration : 7000, position:'bottom-center'}
+            );
+            clearInterval(genreIntervalID.current.current);
+            genreIntervalID.current.current = null;
+          }, 9000);
+        }
+    
+        return () => {
+          clearInterval(langIntervalID.current.current);
+          clearInterval(genreIntervalID.current.current);
+        };
+      }, [user.lang, user.genre]);
 
   return (
     <div className='flex flex-col gap-4'>
@@ -23,7 +82,7 @@ const ListenClient: React.FC<IListenNow>  = ({tracks, playlist}) => {
             <div className="w-full h-[1px] bg-slate-700"/>
             <div className='flex flex-row gap-6 flex-wrap justify-start'>
                 {
-                    tracks.tracks.items.map((track : any)=>(
+                   tracks.slice(0,4).map((track : any)=>(
                         <TrackCard
                         key={track.id}
                         imgSrc={track.album.images[0].url}
