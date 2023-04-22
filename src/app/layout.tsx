@@ -5,6 +5,7 @@ import LoginModal from '@/component/Modals/LoginModal';
 import ToastProvider from '@/component/ToastProvider';
 import Topbar from '@/component/Topbar.tsx/page';
 import { getCurrentUser } from '@/actions/getCurrentUser';
+import PreferenceModal from '@/component/Modals/PreferenceModal';
 
 export const metadata = {
   title: 'Music',
@@ -27,6 +28,7 @@ export default async function RootLayout( { children } : { children: React.React
         <div className='flex flex-row-reverse relative w-[100vw] h-[100vh] '>
         <ToastProvider>
         <LoginModal/>
+        {user && <PreferenceModal user={user}/>}
         <Sidebar/>
         <div className='basis-5/6 p-10 flex flex-col gap-10 lg:pl-24'>
         <Topbar user={user}/>
