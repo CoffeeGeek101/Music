@@ -38,14 +38,22 @@ export const authOption : NextAuthOptions = {
             }
         },
         async session({session,token}){
+            const dbUser = (await db.get(`user:${token.id}`)) as User | null
+
             if(token){
                 session.user.id = token.id,
                 session.user.name = token.name,
                 session.user.email = token.email,
-                session.user.image = token.picture,
-                session.user.genre = [],
-                session.user.lang = [],
-                session.user.likedSongs = []
+                session.user.image = token.picture
+                if (dbUser) {
+                    session.user.lang = dbUser.lang || []
+                    session.user.genre = dbUser.genre || []
+                    session.user.likedSongs = dbUser.likedSongs || []
+                  } else {
+                    session.user.lang = []
+                    session.user.genre = []
+                    session.user.likedSongs = []
+                  }
             }
             return session
         },

@@ -9,11 +9,12 @@ const ButtonVariantProps = cva(
             variant : {
                 main : 'bg-blue-500',
                 auth : 'bg-white text-black hover:bg-blue-200',
-                backy : 'bg-white'
+                backy : 'bg-white text-black shadow-black'
             },
             size :{
                 free : 'px-20 py-3',
-                modal : 'w-full py-3 text-center'
+                modal : 'w-full py-3 text-center',
+                small : 'px-4 py-2 text-center text-xs'
             }
         },
         defaultVariants :{
