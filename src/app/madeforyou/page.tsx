@@ -7,7 +7,7 @@ import MoodHero from '@/component/MoodHero';
 
 
 
-const page = () => {
+const Madeforyou = () => {
   const router = useRouter();
     const mood_arr = mood;
   return (
@@ -36,4 +36,4 @@ const page = () => {
   );
 };
 
-export default page
+export default Madeforyou
