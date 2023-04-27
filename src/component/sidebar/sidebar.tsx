@@ -11,7 +11,7 @@ const Sidebar = () => {
   const router = useRouter();
 
   return (
-    <div className='basis-auto border-r-[1px] border-slate-400/25 shadow-md shadow-black h-[100vh] fixed top-0 left-0 p-4 lg:p-10 transition-all'>
+    <div className='basis-auto border-r-[1px] border-slate-400/25 shadow-md shadow-black h-[100vh] fixed top-0 left-0 p-4 lg:p-10 transition-all z-40 bg-slate-900'>
         <div className='flex flex-col items-center justify-start gap-14'>
         <div
         onClick={()=>router.push('/')}
