@@ -25,12 +25,12 @@ export default async function RootLayout( { children } : { children: React.React
       <body
       className={`bg-slate-900 text-white ${font.className}`}
       >
-        <div className='flex flex-row-reverse relative w-[100vw] h-[100vh] '>
+        <div className='flex flex-row-reverse relative w-[100vw] h-[100vh]'>
         <ToastProvider>
         <LoginModal/>
         {user && <PreferenceModal user={user}/>}
         <Sidebar/>
-        <div className='basis-5/6 p-10 flex flex-col gap-10 lg:pl-24'>
+        <div className='basis-5/6 p-6 ml-5 md:p-10 lg:p-10 flex flex-col gap-10 lg:pl-24 relative'>
         <Topbar user={user}/>
         {children}
         </div>
