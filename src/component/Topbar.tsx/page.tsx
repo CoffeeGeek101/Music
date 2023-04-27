@@ -56,7 +56,7 @@ const Topbar:React.FC<ITopbarProps> = ({user}) => {
             <AlignJustify color='#d9edff'/>
             {
                 isOpen && (
-                    <div className=' w-[100px] lg:w-[200px] flex flex-col h-auto bg-slate-800 absolute top-[50px] right-1 rounded-lg transition-all'>
+                    <div className=' w-[100px] lg:w-[200px] flex flex-col h-auto bg-slate-800 absolute top-[50px] right-1 rounded-lg transition-all z-50'>
                         <UserItem onClick={()=>{}} label={'About us'}/>
                         <UserItem onClick={()=>{}} label={'Guide'}/>
                         {user && (<UserItem label='My Preferences' onClick={()=>usePreference.onOpen()}/>)}
