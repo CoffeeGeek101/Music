@@ -1,14 +1,19 @@
 "use client"
-import React, { useState } from 'react'
+import { TrackDetail } from '@/app/madeforyou/[moods]/moodClient';
+import useLikedSongs from '@/hooks/LikedsongHook';
+import React from 'react'
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 interface ISongCard{
-    track : {}
+    track : TrackDetail;
+    user : User | null
 }
 
-const SongCard : React.FC<ISongCard> = ({track} : any) => {
+const SongCard : React.FC<ISongCard> = ({track, user}) => {
 
-    const [liked, setLiked] = useState(false)
+    const songId = track.id;
+    
+    const {likedSong, toggleLike} = useLikedSongs({songId, user})
 
   return (
     <div className='flex flex-row gap-2 items-center'>
@@ -20,7 +25,9 @@ const SongCard : React.FC<ISongCard> = ({track} : any) => {
                 <p className='text-[9px] md:text-[12px] text-slate-500'>{track.artists[0].name}</p>
             </div>
         </div>
-        { liked ? <AiFillHeart size={25} color='#3776ff'/> : <AiOutlineHeart size={25}/>}
+        <div onClick={toggleLike} className='hover:cursor-pointer'>
+        { likedSong ? <AiFillHeart size={25} color='#3776ff'/> : <AiOutlineHeart size={25}/>}
+        </div>
     </div>
   )
 }
