@@ -6,7 +6,7 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 interface ISongCard{
     track : TrackDetail;
-    user : User | null
+    user : User;
 }
 
 const SongCard : React.FC<ISongCard> = ({track, user}) => {
