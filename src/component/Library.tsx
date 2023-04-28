@@ -14,9 +14,13 @@ const Library = () => {
         Library.
     </p>
     <div className='flex flex-col gap-10 lg:gap-2'>
-        <div className='flex flex-row gap-2 items-center py-2 lg:px-8 rounded-full hover:cursor-pointer lg:hover:bg-gradient-to-r from-[#88e7ff00] to-[#224affa9] hover:shadow-xl'>
+        <div 
+        onClick={()=>router.push('/likedsongs')}
+        className='flex flex-row gap-2 items-center py-2 lg:px-8 rounded-full hover:cursor-pointer lg:hover:bg-gradient-to-r from-[#88e7ff00] to-[#224affa9] hover:shadow-xl'>
             <Heart size={20} color='#d9edff'/>
-            <p className='hidden md:hidden lg:block font-light bg-clip-text text-transparent bg-gradient-to-br from-white to-[#899fff]'>Liked Songs</p>
+            <p className='hidden md:hidden lg:block font-light bg-clip-text text-transparent bg-gradient-to-br from-white to-[#899fff]'>
+                Liked Songs
+            </p>
         </div>
         <div
         onClick={()=>router.push('/madeforyou')}

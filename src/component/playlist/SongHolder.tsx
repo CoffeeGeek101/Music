@@ -1,18 +1,20 @@
 "use client"
+import { TrackDetail, Tracks } from '@/app/madeforyou/[moods]/moodClient'
 import React from 'react'
 import SongCard from './SongCard'
 
 interface ISongHolder{
-    tracks : {}
+    tracks : Tracks
+    user : User | null
 }
 
-const SongHolder : React.FC<ISongHolder> = ({tracks} : any) => {
+const SongHolder : React.FC<ISongHolder> = ({tracks,user} : any) => {
   return (
    <div className='h-[550px]'>
      <div className='flex flex-col gap-3 h-full p-2 overflow-x-hidden overflow-y-scroll'>
      {
-        tracks.map((track : any)=>(
-            <SongCard key={track.id} track={track}/>
+        tracks.map((track : TrackDetail)=>(
+            <SongCard key={track.id} track={track} user={user}/>
         ))
     }
      </div>
