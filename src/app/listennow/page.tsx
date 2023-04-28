@@ -14,9 +14,10 @@ const ListenNow = async () => {
 
   if(!user){
     return (
-      <div className='flex flex-row justify-center items-center h-full'>
-        <FallBack/>
-      </div>
+        <FallBack 
+        label_A='Seems like, you are not Logged in.' 
+        label_B='Login to continue'
+        />
     )
   }
   const genreArray = genres;
