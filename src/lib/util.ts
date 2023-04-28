@@ -19,3 +19,10 @@ export function getGoogleIds(){
     }
     return {client_id, client_secret}
 }
+
+export function isSongsLiked(song_arr : any[]){
+    if(song_arr.length === 0){
+        return true
+    }
+    return false
+}
