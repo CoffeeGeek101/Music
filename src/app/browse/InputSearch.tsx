@@ -1,9 +1,10 @@
 "use client"
 import FallBack from '@/component/FallBack';
+import useSearchHistory from '@/hooks/SearchHistoryHook';
 import { BASE_URL } from '@/lib/util';
 import axios from 'axios';
 import { CornerDownLeft, Keyboard } from 'lucide-react';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SearchResult from './SearchResult';
 
 interface InputProps{
@@ -14,7 +15,8 @@ const InputSearch: React.FC<InputProps> = ({token}) => {
 
   const [search, setSearch] = useState<string>('');
   const [data, setData] = useState(null);
-  const [history, setHistory] = useState<string[]>([]);
+
+  const {searchHistory,getSearchHistory,listDresser} = useSearchHistory({searchterm : search});
 
   const onSearch = async( e : React.FormEvent) =>{
       e.preventDefault();
@@ -25,8 +27,12 @@ const InputSearch: React.FC<InputProps> = ({token}) => {
           }
       })
       setData(res.data);
-      setHistory((prevValue)=> [...prevValue, search])
+      listDresser();
   }
+
+  useEffect(()=>{
+    getSearchHistory();
+  },[])
 
   return (
     <div>
@@ -50,12 +56,12 @@ const InputSearch: React.FC<InputProps> = ({token}) => {
         (
         <div className='flex justify-center w-full'>
           {
-            history.length === 0 ? (<FallBack label_A='Start Seaching' label_B='you can search for songs and artists'/>) 
+            searchHistory.length === 0 ? (<FallBack label_A='Start Seaching' label_B='you can search for songs and artists'/>) 
             : 
             (
             <div className='flex flex-col gap-3 h-auto w-full'>
                 {
-                  history.map((searchHistory)=>(
+                  searchHistory.map((searchHistory : any)=>(
                   <div key={searchHistory} className='p-3 border-b-[1px]'>
                     <p className='font-light'>{searchHistory}</p>
                   </div>))
