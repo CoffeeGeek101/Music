@@ -1,3 +1,4 @@
+import { db } from "@/lib/db";
 import { mood } from "@/lib/moods";
 import getValid_token from "@/lib/SpotityClient";
 import { BASE_URL } from "@/lib/util";
@@ -24,9 +25,17 @@ export default async function getRecomendation(params : IReccomendation){
     const max_loudness = mood_settings?.max_loudness;
     const market = user?.lang.join(',')
 
+    const songlist = await db.lrange(`user:${user?.id}:songHistory`, 0, -1);
+    const seed_tracks = songlist.join(',');
+    const track_length = seed_tracks.length;
+    const artistlist = await db.lrange(`user:${user?.id}:artistHistory`,0,-1);
+    const seed_artists = artistlist.join(',');
+    const artist_length = seed_artists.length;
+
+
     try{
         const res = await fetch(
-            `${BASE_URL}/recommendations?seed_genres=${genre}&market=${market}&target_tempo=${target_tempo}&max_tempo=${max_tempo}&target_valence=${target_valence}&max_valence=${max_valence}&target_loudness=${target_loudness}&max_loudness=${max_loudness}`,
+            `${BASE_URL}/recommendations?${artist_length === 0 ? '' : `seed_artists=${seed_artists}&`}${track_length === 0 ? '' : `seed_tracks=${seed_tracks}&`}${track_length === 0 && artist_length === 0 ? `seed_genres=${genre}&` : ''}market=${market}&target_tempo=${target_tempo}&max_tempo=${max_tempo}&target_valence=${target_valence}&max_valence=${max_valence}&target_loudness=${target_loudness}&max_loudness=${max_loudness}`,
             {
                 headers : {
                     'Authorization' : `Bearer ${token}`
@@ -37,11 +46,11 @@ export default async function getRecomendation(params : IReccomendation){
             }
         )
         const songs = await res.json();
-        console.log(songs);
+        // console.log(songs);
         return songs;
 
     }catch(error){
-        console.log(error)
+        console.log('im error')
     }
 }
 
