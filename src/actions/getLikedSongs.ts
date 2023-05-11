@@ -1,6 +1,7 @@
 import getValid_token from "@/lib/SpotityClient"
 import { BASE_URL } from "@/lib/util";
 import axios from "axios";
+import { NextResponse } from "next/server";
 import { getCurrentUser } from "./getCurrentUser";
 
 export const getLikedSongs = async() => {
@@ -9,7 +10,7 @@ export const getLikedSongs = async() => {
     const user = await getCurrentUser();
 
     if(!user){
-        throw new Error('NO user, please login')
+        return NextResponse.error();
     }
 
     const likedsong = user.likedSongs;

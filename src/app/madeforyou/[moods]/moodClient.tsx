@@ -40,7 +40,7 @@ const MoodClient : React.FC<IMoodClient> = ({moody_songs , expression, user}) =>
     console.log(moody_songs)
 
     return (
-    <div className='flex flex-col gap-4 lg:flex-row justify-between'>
+    <div className='flex flex-col gap-4 lg:flex-row justify-between pb-[100px]'>
         <MoodCard mood_detail={moodcard}/>
         <SongHolder tracks={tracklist} user={user}/>
     </div>

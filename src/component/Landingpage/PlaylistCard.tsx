@@ -13,11 +13,11 @@ const PlaylistCard : React.FC<IPlaylistCard> = ({
     des,
 }) => {
   return (
-    <div className='flex flex-col justify-start w-[300px] md:w-[250px] lg:w-[230px] gap-3'>
+    <div className='flex flex-col justify-start w-[300px] h-[300px] md:w-[250px] md:h-[250px] lg:w-[230px] lg:h-[230px] gap-3'>
         <img
         src={imgSrc}
         alt='playlists'
-        className='rounded-md shadow-lg shadow-[#4171ff55]'
+        className='rounded-md shadow-lg shadow-[#4171ff55] object-cover w-full h-full'
         />
         <p className='text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-white to-[#899fff]'>{name}</p>
         {<p className='text-xs font-light text-slate-400 mt-[-5px]'>{des}</p>}

@@ -2,7 +2,8 @@ import { UpstashRedisAdapter } from '@next-auth/upstash-redis-adapter'
 import {NextAuthOptions} from 'next-auth'
 import { db } from './db'
 import GoogleProvider from 'next-auth/providers/google'
-import { getGoogleIds } from './util'
+import SpotifyProvider from 'next-auth/providers/spotify'
+import { getGoogleIds, getSpotifyIds } from './util'
 
 export const authOption : NextAuthOptions = {
     adapter : UpstashRedisAdapter(db),
@@ -16,6 +17,10 @@ export const authOption : NextAuthOptions = {
         GoogleProvider({
             clientId : getGoogleIds().client_id,
             clientSecret : getGoogleIds().client_secret
+        }),
+        SpotifyProvider({
+            clientId : getSpotifyIds().client_id,
+            clientSecret : getSpotifyIds().client_secret,
         })
     ],
     callbacks : {
@@ -34,12 +39,11 @@ export const authOption : NextAuthOptions = {
                 picture : dbUser.image,
                 language : dbUser.lang,
                 genre : dbUser.genre,
-                likedSongs : dbUser.likedSongs
+                likedSongs : dbUser.likedSongs,
             }
         },
         async session({session,token}){
             const dbUser = (await db.get(`user:${token.id}`)) as User | null
-
             if(token){
                 session.user.id = token.id,
                 session.user.name = token.name,
