@@ -7,13 +7,21 @@ import LikedSongClient from './LikedSongClient';
 
 const LikedSongs = async () => {
     
-    const likedsongs_arr = await getLikedSongs();
     const user = await getCurrentUser();
+    const likedsongs_arr : any = await getLikedSongs();
+
+    if(!user){
+      return (
+          <FallBack 
+          label_A='Seems like, you are not Logged in.' 
+          label_B='Login to continue'
+          />
+      )
+    }
 
     const willFallBack = isSongsLiked(likedsongs_arr);
-
   return (
-    <div>
+    <div className='pb-[170px]'>
         { willFallBack ? 
             (<FallBack label_A='Seems like you dont have any liked songs' label_B='your liked song will appear here'/>) 
             : 
