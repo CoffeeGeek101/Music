@@ -5,7 +5,7 @@ export const getCurrentUser = async () =>{
 
     const session = await getServerSession(authOption);
 
-    if(!session?.user.email){
+    if(!session?.user.id){
         return null;
     }
     const {id, name, email, image, genre, likedSongs, lang } = session.user;
