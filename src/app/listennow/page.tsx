@@ -43,7 +43,7 @@ const ListenNow = async () => {
   const tracks = prefTracks.tracks.items.sort(()=> Math.random() - 0.5);
 
   return (
-    <div>
+    <div className='pb-[150px]'>
       <ListenClient user={user} tracks={tracks} playlist={prefPlaylist}/>
     </div>
   )
