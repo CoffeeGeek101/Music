@@ -35,12 +35,12 @@ const LandingPage : React.FC<ILandingProps> = ({
           }
         </div>
       </div>
-      <div className="h-[30vh] m-auto flex flex-col items-center justify-center gap-6">
+      <div className="h-[30vh] m-auto flex flex-col items-center justify-center gap-6 mt-[35px]">
         <p className="text-gray-500">Login, to get started</p>
         <button
         onClick={useLogin.onOpen}
         style={{boxShadow:'1px 1px 30px 13px #007bff3f'}}
-        className="py-2 px-16 bg-blue-600 text-base md:text-xl lg:text-2xl rounded-full font-light active:scale-95">Login</button>
+        className="py-2 px-16 mt-[-20px] bg-blue-600 text-base md:text-xl lg:text-2xl rounded-full font-light active:scale-95">Login</button>
       </div>
     </div>
   )
