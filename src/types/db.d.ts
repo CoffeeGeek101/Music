@@ -5,7 +5,8 @@ interface User {
     image : string | null | undefined,
     lang : language[],
     genre : genre[],
-    likedSongs : songs[]
+    likedSongs : songs[],
+    spotifyAccessToken : string,
 }
 
 type songs = string;

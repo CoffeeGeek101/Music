@@ -1,18 +1,23 @@
+"use client"
 import React from 'react'
 
 interface IPlaylistCard{
     imgSrc : string;
     name : string;
     artist : string;
+    onClick : () => void;
 }
 
 const TrackCard : React.FC<IPlaylistCard> = ({
     imgSrc,
     name,
     artist,
+    onClick
 }) => {
   return (
-    <div className='flex flex-col justify-start w-[300px] md:w-[250px] lg:w-[230px] gap-3'>
+    <div
+    onClick={onClick}
+    className='flex flex-col justify-start w-[300px] md:w-[250px] lg:w-[230px] gap-3'>
         <img
         src={imgSrc}
         alt='playlists'

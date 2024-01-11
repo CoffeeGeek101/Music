@@ -8,7 +8,7 @@ export const getCurrentUser = async () =>{
     if(!session?.user.id){
         return null;
     }
-    const {id, name, email, image, genre, likedSongs, lang } = session.user;
+    const {id, name, email, image, genre, likedSongs, lang, spotifyAccessToken } = session.user;
 
     const user = {
         id,
@@ -17,7 +17,8 @@ export const getCurrentUser = async () =>{
         image,
         genre,
         likedSongs,
-        lang
+        lang,
+        spotifyAccessToken
     }
     return user;
 }
