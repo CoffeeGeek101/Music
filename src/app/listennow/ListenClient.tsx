@@ -7,6 +7,8 @@ import { toast } from 'react-hot-toast';
 import { FileHeart, Globe2 } from 'lucide-react';
 import Button from '@/component/Button';
 import usePrefernceModal from '@/hooks/PreferenceHook';
+import queryString from 'query-string';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 interface IListenNow{
     tracks : any;
@@ -74,6 +76,27 @@ const ListenClient: React.FC<IListenNow>  = ({tracks, playlist, user}) => {
         };
       }, [user.lang, user.genre, usePrefernce.onOpen]);
 
+      const router = useRouter();
+      const params = useSearchParams();
+
+      const handleClick = (id : string) =>{
+        let currentQuery = {};
+
+        if(params){
+            currentQuery = queryString.parse(params.toString());
+        }
+        const updatedQuery:any = {
+            ...currentQuery,
+            songuid : id
+        } 
+        const url = queryString.stringifyUrl({
+            url:'/listennow',
+            query : updatedQuery  
+        },{skipNull:true});
+
+        router.push(url);
+      }
+
   return (
     <div className='flex flex-col gap-4'>
         <div className='flex flex-col gap-3'>
@@ -84,8 +107,9 @@ const ListenClient: React.FC<IListenNow>  = ({tracks, playlist, user}) => {
             <div className="w-full h-[1px] bg-slate-700"/>
             <div className='flex flex-row gap-6 flex-wrap justify-start'>
                 {
-                   tracks.slice(0,4).map((track : any)=>(
+                   tracks.slice(0,4).map((track : any)=>( 
                         <TrackCard
+                        onClick = {()=>handleClick(track.id)}
                         key={track.id}
                         imgSrc={track.album.images[0].url}
                         name = {track.name}
