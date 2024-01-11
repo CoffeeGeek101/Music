@@ -107,7 +107,7 @@ const ListenClient: React.FC<IListenNow>  = ({tracks, playlist, user}) => {
             <div className="w-full h-[1px] bg-slate-700"/>
             <div className='flex flex-row gap-6 flex-wrap justify-start'>
                 {
-                   tracks.slice(0,4).map((track : any)=>( 
+                   tracks?.slice(0,4).map((track : any)=>( 
                         <TrackCard
                         onClick = {()=>handleClick(track.id)}
                         key={track.id}
