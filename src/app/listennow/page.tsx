@@ -40,7 +40,7 @@ const ListenNow = async () => {
   const prefTracks = await getTracksByPreference({qGenre,qLang,});
   const prefPlaylist = await getPLaylistByPreference({qGenre,qLang});
 
-  const tracks = prefTracks.tracks.items.sort(()=> Math.random() - 0.5);
+  const tracks = prefTracks?.tracks.items.sort(()=> Math.random() - 0.5);
 
   return (
     <div className='pb-[150px]'>
