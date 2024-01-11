@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@auth/upstash-redis-adapter": "^1.0.13",
     "@next-auth/upstash-redis-adapter": "^3.0.4",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/next-auth": "^3.15.0",
